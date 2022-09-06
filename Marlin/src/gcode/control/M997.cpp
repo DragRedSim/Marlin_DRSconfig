@@ -24,6 +24,10 @@
 
 #if ENABLED(PLATFORM_M997_SUPPORT)
 
+#if HAS_DWIN_E3V2 || IS_DWIN_MARLINUI
+    #include "../../lcd/e3v2/common/dwin_api.h"
+  #endif
+
 #if ENABLED(DWIN_LCD_PROUI)
   #include "../../lcd/e3v2/proui/dwin.h"
 #endif
@@ -33,7 +37,9 @@
  */
 void GcodeSuite::M997() {
 
-  TERN_(DWIN_LCD_PROUI, DWIN_RebootScreen());
+  #if HAS_DWIN_E3V2 || IS_DWIN_MARLINUI
+    DWIN_RebootScreen();
+  #endif
 
   flashFirmware(parser.intval('S'));
 

@@ -41,7 +41,7 @@
 #define BOARD_NO_NATIVE_USB
 
 //
-// Release PB4 (Y_ENABLE_PIN) from JTAG NRST role
+// Release PB4 (E0_STEP_PIN) from JTAG NRST role
 //
 #ifndef DISABLE_DEBUG
   #define DISABLE_DEBUG
@@ -84,7 +84,11 @@
   #define Y_STOP_PIN                        PA6
 #endif
 #ifndef Z_STOP_PIN
-  #define Z_STOP_PIN                        PA7
+  #if ENABLED(Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN)
+    #define Z_STOP_PIN                        PA7
+  #elif DISABLED(USE_PROBE_FOR_Z_HOMING)
+    #define Z_STOP_PIN                        PA7
+  #endif
 #endif
 
 #ifndef Z_MIN_PROBE_PIN
@@ -131,7 +135,9 @@
 #ifndef E0_DIR_PIN
   #define E0_DIR_PIN                        PB3
 #endif
-#define E0_ENABLE_PIN               X_ENABLE_PIN
+#ifndef E0_ENABLE_PIN
+  #define E0_ENABLE_PIN             X_ENABLE_PIN
+#endif
 
 //
 // Temperature Sensors
@@ -225,6 +231,18 @@
 
 #elif ANY(HAS_DWIN_E3V2, IS_DWIN_MARLINUI, DWIN_VET6_CREALITY_LCD)
 
+    /**
+     *    DWIN LCD PORT
+     *                 ------
+     *  PC6    Unused | 1  2 | Unused    PB2
+     *  PB10       RX | 3  4 | TX        PE8
+     *  PB14  ENC_BTN   5  6 | Beeper    PB13
+     *  PB12    ENC_B | 7  8 | ENC_A     PB15
+     *   GND          | 9 10 |           5V
+     *                 ------
+     *         EXP1
+     */
+  
   #if HAS_DWIN_E3V2 || IS_DWIN_MARLINUI
     // RET6 DWIN ENCODER LCD
     #define EXP1_05_PIN                     PB14

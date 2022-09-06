@@ -26,6 +26,7 @@
 #include "dwin_api.h"
 #include "dwin_set.h"
 #include "dwin_font.h"
+#include "dwin_color.h"
 
 #include "../../../inc/MarlinConfig.h"
 
@@ -438,6 +439,21 @@ void DWIN_ICON_AnimationControl(uint16_t state) {
   DWIN_Byte(i, 0x29);
   DWIN_Word(i, state);
   DWIN_Send(i);
+}
+
+/*---------------------------------------- Reboot function -----------------------------------------*/
+
+//Display information on rebooting system using M997.
+//Ported from ProUI to be able to be used on all DWIN UIs.
+void DWIN_RebootScreen() {
+  const char* string = GET_TEXT(MSG_PLEASE_WAIT_REBOOT);
+  //calculate position to centre on X
+  const uint16_t x = _MAX(0U, DWIN_WIDTH - strlen_P(string) * fontWidth(font8x16)) / 2 - 1;
+  DWIN_Frame_Clear(Color_Bg_Black);
+  DWIN_JPG_ShowAndCache(0);
+  DWIN_Draw_String(false, font8x16, Color_White, Color_Bg_Black, x, 220, string);
+  DWIN_UpdateLCD();
+  safe_delay(500);
 }
 
 /*---------------------------------------- Memory functions ----------------------------------------*/

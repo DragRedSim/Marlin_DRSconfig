@@ -268,3 +268,8 @@ void DWIN_ICON_Animation(uint8_t animID, bool animate, uint8_t libID, uint8_t pi
 // Animation Control
 //  state: 16 bits, each bit is the state of an animation id
 void DWIN_ICON_AnimationControl(uint16_t state);
+
+/*---------------------------------------- Reboot function -----------------------------------------*/
+
+//Display information on rebooting system using M997.
+void DWIN_RebootScreen();
