@@ -41,20 +41,18 @@
 #define Z_STEP_PIN                          PB5
 #define Z_DIR_PIN                           PB6
 
-#define Z2_STEP_PIN                         PB4 //marked as E on board; being repurposed for Z2 in our case
-#define Z2_DIR_PIN                          PB3
+#define Z2_STEP_PIN                         PB3 //marked as E on board; being repurposed for Z2 in our case
+#define Z2_DIR_PIN                          PB4
 #define Z2_ENABLE_PIN                       X_ENABLE_PIN
+#undef E0_ENABLE_PIN
 
 #define E0_STEP_PIN                         PA14 //SWCLK (STEP - pulled low)
 #define E0_DIR_PIN                          PA13 //SWIO  (DIR - pulled high)
 #ifdef HAS_TMC_UART
-  #define E0_SERIAL_TX_PIN                  PA7  // Z-endstop; freed by using BLTouch as Z
-  #define E0_SERIAL_RX_PIN                  PA7  // WARNING: currently in test to see if it works through the resistor on board.
+  #define E0_SERIAL_TX_PIN                  PC6  // Blank pin on LCD connector
+  #define E0_SERIAL_RX_PIN                  PC6  // WARNING: currently in test to see if it works through the resistor on board.
                                                  // Backup plan is to use the unused pins on the LCD port
   #define TMC_BAUD_RATE                     19200 //appears to be maximum capacity for STM32 software serial
 #endif
-//#define E0_ENABLE_PIN                     PA7  // Z-endstop, held high by default
-//WARNING: no E0_ENABLE_PIN currently set up, driver will never be shut down.
-//Intent is to provide a separate bus for just turning off the E motor, likely tapping PB2 from LCD port.
 
 #include "pins_CREALITY_V4.h"

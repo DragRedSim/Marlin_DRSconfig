@@ -88,6 +88,8 @@
     #define Z_STOP_PIN                        PA7
   #elif DISABLED(USE_PROBE_FOR_Z_HOMING)
     #define Z_STOP_PIN                        PA7
+  #else
+    #define Z_STOP_PIN -1 //we are using a probe in a dedicated connector to home Z
   #endif
 #endif
 
@@ -135,9 +137,9 @@
 #ifndef E0_DIR_PIN
   #define E0_DIR_PIN                        PB3
 #endif
-#ifndef E0_ENABLE_PIN
+/*#ifndef E0_ENABLE_PIN
   #define E0_ENABLE_PIN             X_ENABLE_PIN
-#endif
+#endif*/
 
 //
 // Temperature Sensors
