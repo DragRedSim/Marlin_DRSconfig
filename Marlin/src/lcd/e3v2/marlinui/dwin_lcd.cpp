@@ -40,7 +40,7 @@
 /*-------------------------------------- System variable function --------------------------------------*/
 
 void DWIN_Startup() {
-  DEBUG_ECHOPGM("\r\nDWIN handshake ");
+  DEBUG_ECHOPGM("\r\nDWIN handshake\r\n");
   delay(750);   // Delay here or init later in the boot process
   const bool success = DWIN_Handshake();
   if (success) DEBUG_ECHOLNPGM("ok."); else DEBUG_ECHOLNPGM("error.");

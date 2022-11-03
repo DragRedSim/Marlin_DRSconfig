@@ -42,7 +42,7 @@
 /*-------------------------------------- System variable function --------------------------------------*/
 
 void DWIN_Startup() {
-  DEBUG_ECHOPGM("\r\nDWIN handshake ");
+  DEBUG_ECHOPGM("\r\nDWIN handshake\r\n");
   delay(750);   // Delay here or init later in the boot process
   if (DWIN_Handshake()) DEBUG_ECHOLNPGM("ok."); else DEBUG_ECHOLNPGM("error.");
   DWIN_Frame_SetDir(1);

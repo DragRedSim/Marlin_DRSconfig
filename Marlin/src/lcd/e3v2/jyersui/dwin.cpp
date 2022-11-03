@@ -671,7 +671,7 @@ void CrealityDWINClass::Draw_Main_Menu(uint8_t select/*=0*/) {
   selection = select;
   Clear_Screen();
   Draw_Title(Get_Menu_Title(MainMenu));
-  SERIAL_ECHOPGM("\nDWIN handshake ");
+  SERIAL_ECHOPGM("\nDWIN handshake\r\n");
   DWIN_ICON_Show(ICON, ICON_LOGO, 71, 72);
   Main_Menu_Icons();
 }
@@ -4809,7 +4809,7 @@ void CrealityDWINClass::Reset_Settings() {
 
 void MarlinUI::init_lcd() {
   delay(800);
-  SERIAL_ECHOPGM("\nDWIN handshake ");
+  SERIAL_ECHOPGM("\nDWIN handshake\r\n");
   if (DWIN_Handshake()) SERIAL_ECHOLNPGM("ok."); else SERIAL_ECHOLNPGM("error.");
   DWIN_Frame_SetDir(1); // Orientation 90°
   DWIN_UpdateLCD();     // Show bootscreen (first image)
