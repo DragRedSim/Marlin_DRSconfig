@@ -1445,7 +1445,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z10\nG0 X%s Y%s"), dtostrf(PROBE_X_MIN, 1, 3, str_1), dtostrf(PROBE_Y_MIN, 1, 3, str_2));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf(PROBE_X_MIN, 1, 3, str_2), dtostrf(PROBE_Y_MIN, 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
@@ -1466,7 +1466,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z10\nG0 X%s Y%s"), dtostrf(PROBE_X_MIN, 1, 3, str_1), dtostrf(PROBE_Y_MAX, 1, 3, str_2));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf(PROBE_X_MIN, 1, 3, str_2), dtostrf(PROBE_Y_MAX, 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
@@ -1487,7 +1487,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z10\nG0 X%s Y%s"), dtostrf(PROBE_X_MAX, 1, 3, str_1), dtostrf(PROBE_Y_MAX, 1, 3, str_2));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf(PROBE_X_MAX, 1, 3, str_2), dtostrf(PROBE_Y_MAX, 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
@@ -1508,7 +1508,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z10\nG0 X%s Y%s"), dtostrf(PROBE_X_MAX, 1, 3, str_1), dtostrf(PROBE_Y_MIN, 1, 3, str_2));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf(PROBE_X_MAX, 1, 3, str_2), dtostrf(PROBE_Y_MIN, 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
@@ -1529,7 +1529,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z10\nG0 X%s Y%s"), dtostrf(((X_MAX_POS / 2.0f) - probe.offset.x), 1, 3, str_1), dtostrf(((Y_MAX_POS / 2.0f) - probe.offset.y), 1, 3, str_2));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf((((PROBE_X_MAX + PROBE_X_MIN) / 2.0f) - probe.offset.x), 1, 3, str_2), dtostrf((((PROBE_Y_MAX + PROBE_Y_MIN) / 2.0f) - probe.offset.y), 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
@@ -1547,6 +1547,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
           if (draw) {
             Draw_Menu_Item(row, ICON_SetZOffset, F("Z Position"));
             Draw_Float(mlev_z_pos, row, false, 100);
+            //might be better explained as "drop nozzle down to this depth if not using bed probe"
           }
           else
             Modify_Value(mlev_z_pos, 0, MAX_Z_OFFSET, 100);
