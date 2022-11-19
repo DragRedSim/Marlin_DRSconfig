@@ -1529,7 +1529,7 @@ void CrealityDWINClass::Menu_Item_Handler(uint8_t menu, uint8_t item, bool draw/
             Popup_Handler(MoveWait);
             if (use_probe) {
               #if HAS_BED_PROBE
-                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf((((PROBE_X_MAX + PROBE_X_MIN) / 2.0f) - probe.offset.x), 1, 3, str_2), dtostrf((((PROBE_Y_MAX + PROBE_Y_MIN) / 2.0f) - probe.offset.y), 1, 3, str_3));
+                sprintf_P(cmd, PSTR("G0 F4000\nG0 Z%s\nG0 X%s Y%s"), dtostrf(max((float)Z_CLEARANCE_DEPLOY_PROBE, Z_CLEARANCE_DEPLOY_PROBE - zoffsetvalue), 1, 3, str_1), dtostrf(((PROBE_X_MIN + PROBE_X_MAX) / 2.0f), 1, 3, str_2), dtostrf(((PROBE_Y_MIN + PROBE_Y_MAX / 2.0f)), 1, 3, str_3));
                 gcode.process_subcommands_now(cmd);
                 planner.synchronize();
                 Popup_Handler(ManualProbing);
