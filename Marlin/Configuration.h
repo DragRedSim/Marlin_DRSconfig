@@ -667,9 +667,9 @@
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
     //From my E3V2: for 10 cycles at 240 degrees
-    #define DEFAULT_Kp  28.83
-    #define DEFAULT_Ki   3.25
-    #define DEFAULT_Kd  64.00
+    #define DEFAULT_Kp  30.61
+    #define DEFAULT_Ki   2.94
+    #define DEFAULT_Kd  79.59
   #endif
 #endif
 
@@ -751,9 +751,9 @@
   //#define PID_BED_DEBUG // Print Bed PID debug data to the serial port.
 
   //From my E3V2: for 10 cycles at 75 degrees
-  #define DEFAULT_bedKp 137.03
-  #define DEFAULT_bedKi 26.76
-  #define DEFAULT_bedKd 467.73
+  #define DEFAULT_bedKp 137.34
+  #define DEFAULT_bedKi  26.82
+  #define DEFAULT_bedKd 468.80
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1644,15 +1644,15 @@
  * These options are most useful for the BLTouch probe, but may also improve
  * readings with inductive probes and piezo sensors.
  */
-#define PROBING_HEATERS_OFF       // Turn heaters off when probing
+//#define PROBING_HEATERS_OFF       // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
-  #define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
-  #define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
+  //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
+  //#define WAIT_FOR_HOTEND         // Wait for hotend to heat back up between probes (to improve accuracy & prevent cold extrude)
 #endif
 //#define PROBING_FANS_OFF          // Turn fans off when probing
 #define PROBING_ESTEPPERS_OFF     // Turn all extruder steppers off when probing
 //#define PROBING_STEPPERS_OFF      // Turn all steppers off (unless needed to hold position) when probing (including extruders)
-//#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
+#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 
 // Require minimum nozzle and/or bed temperature for probing
 //#define PREHEAT_BEFORE_PROBING
@@ -1941,8 +1941,8 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-//#define RESTORE_LEVELING_AFTER_G28
-//#define ENABLE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28
+#define ENABLE_LEVELING_AFTER_G28
 
 /**
  * Auto-leveling needs preheating
@@ -2044,8 +2044,8 @@
 
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
-  #define MESH_INSET 30       //13      // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 5 //13      // Don't use more than 15 points per axis, implementation limited.
+  #define MESH_INSET 2       //13      // Set Mesh bounds as an inset region of the bed
+  #define GRID_MAX_POINTS_X 9 //13      // Don't use more than 15 points per axis, implementation limited.
                                         // Commented values selected to probe a 230x230mm grid on integer measurements.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -2099,9 +2099,9 @@
 #define LCD_BED_LEVELING
 
 #if ENABLED(LCD_BED_LEVELING)
-  #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
+  #define MESH_EDIT_Z_STEP  0.01  // (mm) Step size while manually probing Z axis.
   #define LCD_PROBE_Z_RANGE 4     // (mm) Z Range centered on Z_MIN_POS for LCD Z adjustment
-  #define MESH_EDIT_MENU        // Add a menu to edit mesh points
+  #define MESH_EDIT_MENU          // Add a menu to edit mesh points
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
